@@ -13,3 +13,33 @@
         <button class="btn btn-primary" (click)="analyze()">Analyse</button>
       </div>
 </div>
+<br>
+<br>
+<ng-container *ngIf="show">
+  <b>Disease Details:</b><br>
+  <ng-container *ngFor="let disease of diseases">
+    <div class="disease">
+      <b>Disease Name: </b>{{disease.name}} <b> Probability : </b>{{disease.probability}}<br>
+      <b>Description: </b>{{disease.details?.description}}
+    </div>
+    <div class="remedies" *ngIf="disease.details?.treatment">
+      <b>Remedies:</b>
+      <br>
+      <div *ngIf="disease.details.treatment?.biological"><b>Biological: </b><br>
+        <ng-container *ngFor="let biological of disease.details.treatment.biological; index as i">
+          {{(i+1) + '.' }}{{biological}}<br>
+        </ng-container>
+      </div>
+      <div *ngIf="disease.details.treatment?.chemical"><b>Chemical: </b><br>
+        <ng-container *ngFor="let chemical of disease.details.treatment.chemical; index as i">
+          {{(i+1) + '.' }}{{chemical}}<br>
+        </ng-container>
+      </div>
+      <div *ngIf="disease.details.treatment?.prevention"><b>Prevention: </b><br>
+        <ng-container *ngFor="let prevention of disease.details.treatment.prevention; index as i">
+          {{(i+1) + '.' }}{{prevention}}<br>
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
