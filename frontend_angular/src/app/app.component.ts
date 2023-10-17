@@ -16,11 +16,12 @@ export class AppComponent {
   private trigger: Subject<void> = new Subject<void>();
   webcamImage: any = null;
   private nextWebcam: Subject<boolean|string> = new Subject<boolean|string>();
-  diseases: any = [];
+  diseases: any;
   show: boolean = false;
   diseaseName: string ='';
   diseaseDescription: string= '';
   remedies: string = ''
+  commonNames: string[] = ["fungi","abiotic"]
   public errors: WebcamInitError[] = [];
   constructor(private http: HttpClient){
 
@@ -43,6 +44,9 @@ export class AppComponent {
   public intializeError(error: WebcamInitError): void {
     this.errors.push(error);
   }
+  public reset(){
+    this.webcamImage = null;
+  }
   public analyze(){
 
       let url ="https://plant.id/api/v3/health_assessment?details=description,treatment,classification,cause&full_disease_list=true";
@@ -64,8 +68,8 @@ export class AppComponent {
     this.remedies = '';
       this.http.post(url,body,{headers}).subscribe((data:any)=>{
         data.result.disease.suggestions.forEach((x:any) => {
-          if(x.probability > 0.1){
-            this.diseases.push(x);
+          if(this.commonNames.indexOf(x.name.toLowerCase()) == -1){
+            this.diseases = x;
           }
         });
         this.show = true;
