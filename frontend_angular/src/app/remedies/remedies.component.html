@@ -1,0 +1,25 @@
+<b>Disease Details:</b><br>
+  
+<div class="disease">
+  <b>Disease Name: </b>{{diseases.name}} <b> Probability : </b>{{diseases.probability}}<br>
+  <b>Description: </b>{{diseases.details?.description}}
+</div>
+<div class="remedies" *ngIf="diseases.details?.treatment">
+  <b>Remedies:</b>
+  <br>
+  <div *ngIf="diseases.details.treatment?.biological"><b>Biological: </b><br>
+    <ng-container *ngFor="let biological of diseases.details.treatment.biological; index as i">
+      {{(i+1) + '.' }}{{biological}}<br>
+    </ng-container>
+  </div>
+  <div *ngIf="diseases.details.treatment?.chemical"><b>Chemical: </b><br>
+    <ng-container *ngFor="let chemical of diseases.details.treatment.chemical; index as i">
+      {{(i+1) + '.' }}{{chemical}}<br>
+    </ng-container>
+  </div>
+  <div *ngIf="diseases.details.treatment?.prevention"><b>Prevention: </b><br>
+    <ng-container *ngFor="let prevention of diseases.details.treatment.prevention; index as i">
+      {{(i+1) + '.' }}{{prevention}}<br>
+    </ng-container>
+  </div>
+</div>

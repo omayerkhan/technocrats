@@ -1,9 +1,6 @@
 <div style="text-align:center" class="row">
     <div class="col-sm-4" *ngIf="!webcamImage">
-      <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)" [allowCameraSwitch]="allowCameraSwitch"
-        [switchCamera]="nextWebcamObservable" (initError)="intializeError($event)"></webcam>
-      <br />
-      <div class="actionBtn" (click)="triggerSnapshot();" title="Take Picture">📸</div>
+     <app-web-cam (image)="handleImage($event)"></app-web-cam>
     </div>
     <div class="snapshot col-sm-4" *ngIf="webcamImage">
       <img [src]="webcamImage.imageAsDataUrl" />
@@ -13,34 +10,11 @@
         <button class="btn btn-primary" (click)="analyze()">Analyse</button>
         <button class="btn btn-secondary" (click)="reset()">Reset</button>
       </div>
+  </div>
 </div>
 <br>
 <br>
 <ng-container *ngIf="show">
-  <b>Disease Details:</b><br>
-  
-    <div class="disease">
-      <b>Disease Name: </b>{{diseases.name}} <b> Probability : </b>{{diseases.probability}}<br>
-      <b>Description: </b>{{diseases.details?.description}}
-    </div>
-    <div class="remedies" *ngIf="diseases.details?.treatment">
-      <b>Remedies:</b>
-      <br>
-      <div *ngIf="diseases.details.treatment?.biological"><b>Biological: </b><br>
-        <ng-container *ngFor="let biological of diseases.details.treatment.biological; index as i">
-          {{(i+1) + '.' }}{{biological}}<br>
-        </ng-container>
-      </div>
-      <div *ngIf="diseases.details.treatment?.chemical"><b>Chemical: </b><br>
-        <ng-container *ngFor="let chemical of diseases.details.treatment.chemical; index as i">
-          {{(i+1) + '.' }}{{chemical}}<br>
-        </ng-container>
-      </div>
-      <div *ngIf="diseases.details.treatment?.prevention"><b>Prevention: </b><br>
-        <ng-container *ngFor="let prevention of diseases.details.treatment.prevention; index as i">
-          {{(i+1) + '.' }}{{prevention}}<br>
-        </ng-container>
-      </div>
-    </div>
+ <app-remedies [diseases]="diseases"></app-remedies>
   
 </ng-container>
