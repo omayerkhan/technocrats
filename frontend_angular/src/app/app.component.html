@@ -2,8 +2,11 @@
     <div class="col-sm-4" *ngIf="!webcamImage">
      <app-web-cam (image)="handleImage($event)"></app-web-cam>
     </div>
-    <div class="snapshot col-sm-4" *ngIf="webcamImage">
-      <img [src]="webcamImage.imageAsDataUrl" />
+    <div *ngIf="webcamImage">
+      <app-crop [image]="webcamImage.imageAsDataUrl" (cropped)="ImageCropped($event)"></app-crop>
+    </div>
+    <div class="snapshot col-sm-4" *ngIf="webcamImage && isCroppedImage">
+      <img [src]="croppedImage" />
       <br>
       <br>
       <div>

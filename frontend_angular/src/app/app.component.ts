@@ -21,6 +21,8 @@ export class AppComponent {
   show: boolean = false;
   commonNames: string[] = ["fungi","abiotic"]
   public errors: WebcamInitError[] = [];
+  croppedImage: any = '';
+  isCroppedImage: boolean= false;
   constructor(private app: AppService){
 
   }
@@ -31,6 +33,10 @@ export class AppComponent {
   
   public reset(){
     this.webcamImage = null;
+  }
+  ImageCropped(event:any){
+    this.croppedImage = event;
+    this.isCroppedImage=true
   }
   public analyze(){
     this.diseases = null;
