@@ -22,4 +22,27 @@ constructor(private http: HttpClient){}
       
      return this.http.post(url,body,{headers})
     }
+    detectLabels(image:any){
+    const apikey = "AIzaSyC6N0BG9mXWBr8NYAqTzaDlZHN-7AVQB00"
+    const url = `https://vision.googleapis.com/v1/images:annotate?key=${apikey}`;
+    const body = {
+      requests: [
+        {
+          image: {
+            content: image.split('base64,')[1]
+          },
+          features: [
+            {
+              maxResults: 4,
+              type: "LABEL_DETECTION"
+            },
+          ]
+        }
+      ]
+    }
+    let headers = {
+      "Content-Type":"application/json"
+    }
+    return this.http.post(url,body,{headers});
+    }
 }

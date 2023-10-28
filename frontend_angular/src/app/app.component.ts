@@ -23,6 +23,8 @@ export class AppComponent {
   public errors: WebcamInitError[] = [];
   croppedImage: any = '';
   isCroppedImage: boolean= false;
+  checkObjects: string[] = ["plant","leaf","grass"];
+  isPlant: boolean = false;
   constructor(private app: AppService){
 
   }
@@ -33,10 +35,30 @@ export class AppComponent {
   
   public reset(){
     this.webcamImage = null;
+    this.isCroppedImage = false;
+    this.show = false;
   }
   ImageCropped(event:any){
     this.croppedImage = event;
-    this.isCroppedImage=true
+    this.isCroppedImage=true;
+    this.app.detectLabels(this.croppedImage).subscribe((data:any)=>{
+      this.isPlant = false;
+      data.responses[0].labelAnnotations.every((x:any)=>{
+        var plant = this.checkObjects.filter((y:any)=>x.description.toLowerCase().includes(y))
+        if(plant.length>0){
+          this.isPlant = true;
+          return false;
+        }
+        else{
+          return true;
+        }
+      })
+      if(!this.isPlant){
+       this.reset();
+       window.alert("Please upload leaf image");
+      }
+
+    })
   }
   public analyze(){
     this.diseases = null;
