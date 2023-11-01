@@ -10,6 +10,7 @@ import { AppService } from './app.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  healthyPlant: boolean = false;
   showWebcam = true;
   allowCameraSwitch = true;
   multipleWebcamsAvailable = false;
@@ -61,8 +62,12 @@ export class AppComponent {
     })
   }
   public analyze(){
-    this.diseases = null;
+    this.healthyPlant = false;
       this.app.analyseLeaf(this.webcamImage.imageAsDataUrl).subscribe((data:any)=>{
+        this.diseases= null;
+        if(data.result.is_healthy.binary && (data.result.is_healthy.probability>0.5)){
+          this.healthyPlant = true;;
+        }
         data.result.disease.suggestions.every((x:any) => {
           if(this.commonNames.indexOf(x.name.toLowerCase()) == -1){
             this.diseases = x;
