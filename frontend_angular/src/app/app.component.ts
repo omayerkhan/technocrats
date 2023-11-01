@@ -33,15 +33,7 @@ export class AppComponent {
   public handleImage(webcamImage: WebcamImage): void {
     this.webcamImage = webcamImage;
   }
-  
-  public reset(){
-    this.webcamImage = null;
-    this.isCroppedImage = false;
-    this.show = false;
-  }
-  ImageCropped(event:any){
-    this.croppedImage = event;
-    this.isCroppedImage=true;
+  cropped(){
     this.app.detectLabels(this.croppedImage).subscribe((data:any)=>{
       this.isPlant = false;
       data.responses[0].labelAnnotations.every((x:any)=>{
@@ -60,6 +52,17 @@ export class AppComponent {
       }
 
     })
+  }
+  
+  public reset(){
+    this.webcamImage = null;
+    this.isCroppedImage = false;
+    this.show = false;
+  }
+  ImageCropped(event:any){
+    this.croppedImage = event;
+    this.isCroppedImage=true;
+    
   }
   public analyze(){
     this.healthyPlant = false;
