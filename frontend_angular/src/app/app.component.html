@@ -1,15 +1,16 @@
 <div style="text-align:center" class="row">
-    <div class="col-sm-4" *ngIf="!webcamImage">
+    <div *ngIf="!webcamImage">
      <app-web-cam (image)="handleImage($event)"></app-web-cam>
     </div>
     <div *ngIf="webcamImage">
       <app-crop [image]="webcamImage.imageAsDataUrl" (cropped)="ImageCropped($event)"></app-crop>
+      <button class="btn btn-primary" (click)="cropped()">Check</button>
     </div>
-    <div class="snapshot col-sm-4" *ngIf="webcamImage && isCroppedImage">
+    <div class="snapshot" *ngIf="webcamImage && isCroppedImage">
       <img [src]="croppedImage" />
       <br>
       <br>
-      <div>
+      <div *ngIf="isPlant">
         <button class="btn btn-primary" (click)="analyze()">Analyse</button>
         <button class="btn btn-secondary" (click)="reset()">Reset</button>
       </div>
