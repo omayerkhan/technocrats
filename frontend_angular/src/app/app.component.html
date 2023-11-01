@@ -18,6 +18,9 @@
 <br>
 <br>
 <ng-container *ngIf="show">
+  <div *ngIf="healthyPlant">
+    <b> looks healthy but there is a possibility of getting below disease. </b>
+  </div>
  <app-remedies [diseases]="diseases"></app-remedies>
   
 </ng-container>
