@@ -1,3 +1,8 @@
+<div id="recaptcha-container"></div>
+<div *ngIf="!loggedIn">
+ <app-login (loggedIn)="LoggedIn($event)"></app-login>
+</div>
+<ng-container *ngIf="loggedIn">
 <div style="text-align:center" class="row">
     <div *ngIf="!webcamImage">
      <app-web-cam (image)="handleImage($event)"></app-web-cam>
@@ -24,4 +29,5 @@
   </div>
  <app-remedies [diseases]="diseases"></app-remedies>
   
+</ng-container>
 </ng-container>
