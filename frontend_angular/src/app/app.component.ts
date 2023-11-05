@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WebcamImage, WebcamInitError } from 'ngx-webcam';
 import { Observable, Subject } from 'rxjs';
 import { AppService } from './app.service';
@@ -9,7 +9,7 @@ import { AppService } from './app.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   healthyPlant: boolean = false;
   showWebcam = true;
   allowCameraSwitch = true;
@@ -26,8 +26,17 @@ export class AppComponent {
   isCroppedImage: boolean= false;
   checkObjects: string[] = ["plant","leaf","grass"];
   isPlant: boolean = false;
+  loggedIn= false;
   constructor(private app: AppService){
 
+  }
+  ngOnInit(){
+    if(localStorage.getItem('user')){
+      this.loggedIn= true;
+    }
+  }
+  LoggedIn(event:any){
+    this.loggedIn = true;
   }
   
   public handleImage(webcamImage: WebcamImage): void {

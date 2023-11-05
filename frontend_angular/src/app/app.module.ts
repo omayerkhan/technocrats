@@ -9,18 +9,35 @@ import { RemediesComponent } from './remedies/remedies.component';
 import { AppService } from './app.service';
 import { CropComponent } from './crop/crop.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { LoginComponent } from './login/login.component';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireModule } from '@angular/fire/compat';
+import { FormsModule } from '@angular/forms';
+const firebaseConfig = {
+  apiKey: "AIzaSyCkzoGGXc8NXuerTPD40uNlBLUp7eBVayU",
+  authDomain: "plantdisease-17e2d.firebaseapp.com",
+  projectId: "plantdisease-17e2d",
+  storageBucket: "plantdisease-17e2d.appspot.com",
+  messagingSenderId: "162451718880",
+  appId: "1:162451718880:web:ee916c31ab1f941cb14685",
+  measurementId: "G-T527LKZPMD"
+};
 @NgModule({
   declarations: [
     AppComponent,
     WebCamComponent,
     RemediesComponent,
-    CropComponent
+    CropComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     WebcamModule,
     HttpClientModule,
-    ImageCropperModule
+    ImageCropperModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+    FormsModule
   ],
   providers: [AppService],
   bootstrap: [AppComponent]
