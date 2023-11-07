@@ -11,6 +11,8 @@ import { AppService } from './app.service';
 })
 export class AppComponent implements OnInit{
   healthyPlant: boolean = false;
+  selectedLanguage:string="en";
+  languages:any = [{code:'en',name:'English'},{code:'fr',name:'French'}]
   showWebcam = true;
   allowCameraSwitch = true;
   multipleWebcamsAvailable = false;
@@ -88,5 +90,54 @@ export class AppComponent implements OnInit{
         });
         this.show = true;
       })
+    }
+    changeLanguage(event:any){
+      this.selectedLanguage=event.target.value;
+        
+        this.app.changeLanguage(this.diseases,event.target.value,'name').subscribe((data:any)=>{
+          this.diseases.name = data.data.translations[0].translatedText;
+          this.diseases.details.description = data.data.translations[1].translatedText;
+          sessionStorage.setItem(this.selectedLanguage,JSON.stringify(this.diseases));
+          
+        })
+        if(this.diseases.details.treatment?.biological){
+         
+          this.app.changeLanguage(this.diseases,event.target.value,'biological').subscribe((data:any)=>{
+            this.diseases.details.treatment.biological = [];
+   
+            data.data.translations.map((x:any)=>{
+              this.diseases.details.treatment.biological.push(x.translatedText)
+              sessionStorage.setItem(this.selectedLanguage,JSON.stringify(this.diseases))
+              
+            })
+          })
+        }
+        if(this.diseases.details.treatment?.chemical){
+          
+          this.app.changeLanguage(this.diseases,event.target.value,'chemical').subscribe((data:any)=>{
+            this.diseases.details.treatment.chemical = [];
+            data.data.translations.map((x:any)=>{
+              this.diseases.details.treatment.chemical.push(x.translatedText)
+              sessionStorage.setItem(this.selectedLanguage,JSON.stringify(this.diseases))
+              
+            })
+           
+          })
+        }
+        if(this.diseases.details.treatment?.prevention){
+          
+          this.app.changeLanguage(this.diseases,event.target.value,'prevention').subscribe((data:any)=>{
+            this.diseases.details.treatment.prevention = [];
+            data.data.translations.map((x:any)=>{
+              this.diseases.details.treatment.prevention.push(x.translatedText)
+              sessionStorage.setItem(this.selectedLanguage,JSON.stringify(this.diseases))
+              
+            })
+           
+          })
+        }
+       
+      
+     
     }
 }
