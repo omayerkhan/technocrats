@@ -45,4 +45,33 @@ constructor(private http: HttpClient){}
     }
     return this.http.post(url,body,{headers});
     }
+    changeLanguage(diseases:any,lang:any,name:string){
+      let body :any
+      if(name == 'name'){
+        body ={
+          "q": [diseases.name,diseases.details?.description],
+          "target": lang
+        }
+      } else if(name == 'biological'){
+        body={
+          "q":diseases.details.treatment?.biological,
+          "target":lang   
+        }
+      } else if(name == 'chemical'){
+        body={
+          "q":diseases.details.treatment?.chemical,
+          "target":lang   
+        }
+
+      }else if(name == 'prevention'){
+        body={
+          "q":diseases.details.treatment?.prevention,
+          "target":lang   
+        }
+
+      }
+     
+      let url = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyC6N0BG9mXWBr8NYAqTzaDlZHN-7AVQB00";
+      return this.http.post(url,body);
+    }
 }

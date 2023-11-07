@@ -28,6 +28,10 @@
     <b> looks healthy but there is a possibility of getting below disease. </b>
   </div>
  <app-remedies [diseases]="diseases"></app-remedies>
-  
+ <div class="translate">
+  <select (change)="changeLanguage($event)">
+    <option [value]="lang.code" [selected]="lang.code=='en'" *ngFor="let lang of languages">{{lang.name}}</option>
+  </select>
+  </div>
 </ng-container>
 </ng-container>
