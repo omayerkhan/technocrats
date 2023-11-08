@@ -15,7 +15,18 @@ export class LoginComponent implements OnInit{
     verificationCode: string = '';
     confirmationResult: any;
     recaptchaVerifier: any;
-    constructor(private afAuth: AngularFireAuth){}
+    otp: string[] = ['', '', '', '', '', ''];
+    constructor(){}
+    onKeyUp(event: any, index: number) {
+      if (event.target.value.length === 1) {
+        if (index < 6) {
+          let nextInput = document.querySelector(`input[name=otp${index + 1}]`) as HTMLElement;
+          if (nextInput) {
+            nextInput.focus();
+          }
+        }
+      }
+    }
     ngOnInit() {
        if (!firebase.apps.length) {
         const yourFirebaseConfig = {
@@ -38,6 +49,7 @@ export class LoginComponent implements OnInit{
         })
         
       }
+     
     
       verifyLoginCode() {
         if (!this.confirmationResult) {
@@ -45,7 +57,7 @@ export class LoginComponent implements OnInit{
           return;
         }
         
-        this.confirmationResult.confirm(this.verificationCode)
+        this.confirmationResult.confirm(this.otp.join(''))
           .then((userCredential:any) => {
             console.log("Successfully signed in:", userCredential.user);
             localStorage.setItem('accessToken',userCredential.user._delegate.accessToken);
