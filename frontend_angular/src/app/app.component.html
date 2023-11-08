@@ -1,7 +1,5 @@
 <div id="recaptcha-container"></div>
-<div *ngIf="!loggedIn">
- <app-login (loggedIn)="LoggedIn($event)"></app-login>
-</div>
+<app-modal *ngIf="!loggedIn" #dynamicModal></app-modal>
 <ng-container *ngIf="loggedIn">
 <div style="text-align:center" class="row">
     <div *ngIf="!webcamImage">

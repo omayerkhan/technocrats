@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
 import { FormsModule } from '@angular/forms';
+import { ModalComponent } from './modal/modal.component';
 const firebaseConfig = {
   apiKey: "AIzaSyCkzoGGXc8NXuerTPD40uNlBLUp7eBVayU",
   authDomain: "plantdisease-17e2d.firebaseapp.com",
@@ -28,7 +29,8 @@ const firebaseConfig = {
     WebCamComponent,
     RemediesComponent,
     CropComponent,
-    LoginComponent
+    LoginComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
