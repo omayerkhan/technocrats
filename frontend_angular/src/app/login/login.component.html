@@ -1,8 +1,21 @@
-<div>
-    <input [(ngModel)]="phoneNumber" placeholder="Enter phone number">
-    <button (click)="sendLoginCode()">Send code</button>
-  
-    <input [(ngModel)]="verificationCode" placeholder="Enter code">
-    <button (click)="verifyLoginCode()">Verify code</button>
-  </div>
-  
+<div *ngIf="!confirmationResult">
+  <div class="welcome">Welcome</div>
+  <input [(ngModel)]="phoneNumber" placeholder="Enter phone number"><br>
+  <button class="btn btn-primary" (click)="sendLoginCode()">Send code</button>
+</div>
+<div *ngIf="confirmationResult">
+<div class="otp">
+  <form>
+    <div class="otp-box">
+      <input class="otp-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" [(ngModel)]="otp[0]" name="otp1" #otp1 (keyup)="onKeyUp($event, 1)">
+      <input class="otp-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" [(ngModel)]="otp[1]" name="otp2" #otp2 (keyup)="onKeyUp($event, 2)">
+      <input class="otp-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" [(ngModel)]="otp[2]" name="otp3" #otp3 (keyup)="onKeyUp($event, 3)">
+      <input class="otp-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" [(ngModel)]="otp[3]" name="otp4" #otp4 (keyup)="onKeyUp($event, 4)">
+      <input class="otp-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" [(ngModel)]="otp[4]" name="otp5" #otp5 (keyup)="onKeyUp($event, 5)">
+      <input class="otp-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" [(ngModel)]="otp[5]" name="otp6" #otp6 (keyup)="onKeyUp($event, 6)">
+    </div>
+    <button type="submit" *ngIf="otp.join('').length == 6"  (click)="verifyLoginCode()">Verify</button>
+  </form>
+</div>
+
+</div>

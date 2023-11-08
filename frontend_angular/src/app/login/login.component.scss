@@ -1,0 +1,75 @@
+input {
+    width: 100%; /* Full width of the card */
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding in width */
+  }
+  
+  /* Style the button to make it more attractive */
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff; /* A pleasant blue shade */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #0056b3; /* Darker blue on hover for feedback */
+  }
+  
+  /* Ensure the form elements stack nicely on smaller screens */
+  @media (max-width: 600px) {
+    .card {
+      width: 90%;
+      margin: auto;
+    }
+  }
+  .otp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f7f7f7;
+  }
+  
+  .otp-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .otp-input {
+    font-size: 20px;
+    text-align: center;
+    width: 40px;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+  }
+  
+  .otp-input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .submit-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .submit-btn:hover {
+    background-color: #0056b3;
+  }
+  
