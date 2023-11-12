@@ -1,18 +1,26 @@
-<div *ngIf="!confirmationResult">
-  <div class="welcome">Welcome</div>
-  <input [(ngModel)]="phoneNumber" placeholder="Enter phone number"><br>
+<div *ngIf="!confirmationResult"  style="margin: auto; width: 50%; padding: 10px; text-align: center;">
+  <div class="welcome" style="font-size: 30px; font-weight: bold">Welcome</div>
+ 
+  <img src="/assets/title-photo.png" style="height: 200px; width: 200px;"/>
+  <input [(ngModel)]="phoneNumber" placeholder="Please enter your mobile number"><br>
   <button class="btn btn-primary" (click)="sendLoginCode()">Send code</button>
 </div>
 <div *ngIf="confirmationResult">
 <div class="otp">
   <form>
-    <div class="otp-box">
+    <div class="otp-box" style="display: grid; grid-row: auto; text-align: center">
+      <div>We have sent a 6 digit OTP for verification</div>
+      <img src="/assets/otp.png" style="height: 200px; width: 200px;"/>
+    
+
+      <div>
       <input class="otp-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" [(ngModel)]="otp[0]" name="otp1" #otp1 (keyup)="onKeyUp($event, 1)">
       <input class="otp-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" [(ngModel)]="otp[1]" name="otp2" #otp2 (keyup)="onKeyUp($event, 2)">
       <input class="otp-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" [(ngModel)]="otp[2]" name="otp3" #otp3 (keyup)="onKeyUp($event, 3)">
       <input class="otp-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" [(ngModel)]="otp[3]" name="otp4" #otp4 (keyup)="onKeyUp($event, 4)">
       <input class="otp-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" [(ngModel)]="otp[4]" name="otp5" #otp5 (keyup)="onKeyUp($event, 5)">
       <input class="otp-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" [(ngModel)]="otp[5]" name="otp6" #otp6 (keyup)="onKeyUp($event, 6)">
+      </div>
     </div>
     <button type="submit" *ngIf="otp.join('').length == 6"  (click)="verifyLoginCode()">Verify</button>
   </form>
