@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { WebcamImage, WebcamInitError } from 'ngx-webcam';
 import { Observable, Subject } from 'rxjs';
 import { AppService } from './app.service';
+import { ModalComponent } from './modal/modal.component';
+import { LoginComponent } from './login/login.component';
 
 @Component({
   selector: 'app-root',
@@ -29,6 +31,19 @@ export class AppComponent implements OnInit{
   checkObjects: string[] = ["plant","leaf","grass"];
   isPlant: boolean = false;
   loggedIn= false;
+  private dynamicModalInstance: ModalComponent | null = null;
+ 
+  @ViewChild('dynamicModal', { static: false })
+  set dynamicModal(value: ModalComponent) {
+    if (value) {
+      this.dynamicModalInstance = value;
+      const componentInstance = this.dynamicModalInstance.openComponent(LoginComponent);
+      componentInstance.loggedIn.subscribe((data:any) => {
+        this.loggedIn = true;
+        this.dynamicModalInstance?.close();
+      });
+    }
+  }
   constructor(private app: AppService){
 
   }
