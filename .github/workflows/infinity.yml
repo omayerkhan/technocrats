@@ -20,7 +20,7 @@ jobs:
 
     - name: Install Angular CLI
       run: npm install -g @angular/cli
-      
+
     - name: Install Dependencies
       run: npm install
       working-directory: ./frontend_angular  
@@ -36,5 +36,5 @@ jobs:
         server: ftpupload.net
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: frontend_angular/dist/frontend_angular 
-        server-dir: /htdocs 
+        local-dir: frontend_angular/dist/frontend_angular/
+        server-dir: /htdocs/
