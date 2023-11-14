@@ -31,14 +31,12 @@ jobs:
 
     - name: Remove old JS files
       run: |
-        sudo apt-get update
-        sudo apt-get install -y lftp
-        lftp -u ${{ secrets.FTP_USERNAME }}, ${{ secrets.FTP_PASSWORD }} ftpupload.net -e "
-        glob -a rm -f /htdocs/main.*.js;
-        glob -a rm -f /htdocs/runtime.*.js;
-        glob -a rm -f /htdocs/styles.*.js;
-        glob -a rm -f /htdocs/polyfills.*.js;
-        bye;"
+       ftp -inv ftpupload.net <<EOF
+       user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
+       mdelete /htdocs/main.*.js
+       mdelete /htdocs/runtime.*.js
+       bye
+       EOF
 
 
     - name: FTP Deploy to InfinityFree
