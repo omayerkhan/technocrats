@@ -158,7 +158,7 @@ export class AppComponent implements OnInit{
     }
     textToSpeech(){
       let voice = '';
-        voice = 'DiseaseName' + "," + this.diseases.name + "." + 'Description' + "," + this.diseases.details?.description + "." + res['Remedies'] + ",";
+        voice = 'DiseaseName' + "," + this.diseases.name + "." + 'Description' + "," + this.diseases.details?.description + "." + 'Remedies' + ",";
         if(this.diseases.details?.treatment){
           if(this.diseases.details.treatment?.biological){
             voice = voice + 'Biological';

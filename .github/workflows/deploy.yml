@@ -1,0 +1,40 @@
+name: Deploy to InfinityFree
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20.9.0'
+
+    - name: Install Angular CLI
+      run: npm install -g @angular/cli
+
+    - name: Install Dependencies
+      run: npm install
+      working-directory: ./frontend_angular  
+
+    - name: Build Project
+      run: ng build --configuration "production" --base-href "http://plantdiseasedetection.infinityfreeapp.com/"
+      working-directory: ./frontend_angular 
+
+
+    - name: FTP Deploy to InfinityFree
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:
+        server: ftpupload.net
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: frontend_angular/dist/frontend_angular/
+        server-dir: /htdocs/
