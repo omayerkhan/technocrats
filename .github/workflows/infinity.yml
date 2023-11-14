@@ -26,7 +26,7 @@ jobs:
       working-directory: ./frontend_angular  
 
     - name: Build Project
-      run: ng build --configuration "production" --base-href "http://yourwebsite.com/"
+      run: ng build --configuration "production" --base-href "http://plantdiseasedetection.infinityfreeapp.com/"
       working-directory: ./frontend_angular 
 
 
