@@ -18,6 +18,9 @@ jobs:
       with:
         node-version: '20.9.0'
 
+    - name: Install Angular CLI
+      run: npm install -g @angular/cli
+      
     - name: Install Dependencies
       run: npm install
       working-directory: ./frontend_angular  
