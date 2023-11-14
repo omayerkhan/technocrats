@@ -32,6 +32,7 @@ export class AppComponent implements OnInit{
   isPlant: boolean = false;
   loggedIn= false;
   private dynamicModalInstance: ModalComponent | null = null;
+  audio: any
  
   @ViewChild('dynamicModal', { static: false })
   set dynamicModal(value: ModalComponent) {
@@ -103,6 +104,7 @@ export class AppComponent implements OnInit{
             return false;
           } else return true;
         });
+        this.textToSpeech();
         this.show = true;
       })
     }
@@ -112,7 +114,7 @@ export class AppComponent implements OnInit{
         this.app.changeLanguage(this.diseases,event.target.value,'name').subscribe((data:any)=>{
           this.diseases.name = data.data.translations[0].translatedText;
           this.diseases.details.description = data.data.translations[1].translatedText;
-          sessionStorage.setItem(this.selectedLanguage,JSON.stringify(this.diseases));
+        this.textToSpeech();
           
         })
         if(this.diseases.details.treatment?.biological){
@@ -122,7 +124,7 @@ export class AppComponent implements OnInit{
    
             data.data.translations.map((x:any)=>{
               this.diseases.details.treatment.biological.push(x.translatedText)
-              sessionStorage.setItem(this.selectedLanguage,JSON.stringify(this.diseases))
+              this.textToSpeech();
               
             })
           })
@@ -133,7 +135,7 @@ export class AppComponent implements OnInit{
             this.diseases.details.treatment.chemical = [];
             data.data.translations.map((x:any)=>{
               this.diseases.details.treatment.chemical.push(x.translatedText)
-              sessionStorage.setItem(this.selectedLanguage,JSON.stringify(this.diseases))
+             this.textToSpeech();
               
             })
            
@@ -145,8 +147,7 @@ export class AppComponent implements OnInit{
             this.diseases.details.treatment.prevention = [];
             data.data.translations.map((x:any)=>{
               this.diseases.details.treatment.prevention.push(x.translatedText)
-              sessionStorage.setItem(this.selectedLanguage,JSON.stringify(this.diseases))
-              
+              this.textToSpeech();             
             })
            
           })
@@ -154,5 +155,36 @@ export class AppComponent implements OnInit{
        
       
      
+    }
+    textToSpeech(){
+      let voice = '';
+        voice = 'DiseaseName' + "," + this.diseases.name + "." + 'Description' + "," + this.diseases.details?.description + "." + res['Remedies'] + ",";
+        if(this.diseases.details?.treatment){
+          if(this.diseases.details.treatment?.biological){
+            voice = voice + 'Biological';
+            this.diseases.details.treatment?.biological.map((x:any)=>{
+              voice = voice + x;
+            })
+          }
+          if(this.diseases.details.treatment?.chemical){
+            voice = voice + 'Chemical'
+            this.diseases.details.treatment?.chemical.map((x:any)=>{
+              voice = voice +x;
+            })
+          }
+          if(this.diseases.details.treatment?.prevention){
+            voice = voice + 'Prevention'
+            this.diseases.details.treatment?.prevention.map((x:any)=>{
+              voice = voice +x;
+            })
+          }
+        }
+        
+       this.app.textToSpeech(voice).subscribe((data:any)=>{
+          this.audio = 'data:audio/mp3;base64,' + data.audioContent;
+          sessionStorage.setItem(this.selectedLanguage+"input",this.audio)
+          
+         })
+  
     }
 }

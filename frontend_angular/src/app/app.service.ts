@@ -74,4 +74,21 @@ constructor(private http: HttpClient){}
       let url = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyC6N0BG9mXWBr8NYAqTzaDlZHN-7AVQB00";
       return this.http.post(url,body);
     }
+
+    textToSpeech(data:any){
+      let body={
+        "input":{
+          "text": data
+        },
+        "voice":{
+          "languageCode":"en-gb",
+          "name":"en-GB-Standard-A",
+          "ssmlGender":"FEMALE"
+        },
+        "audioConfig":{
+          "audioEncoding":"MP3"
+        }
+       }
+       return this.http.post('https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyC6N0BG9mXWBr8NYAqTzaDlZHN-7AVQB00',body);
+    }
 }
