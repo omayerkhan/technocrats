@@ -29,6 +29,15 @@ jobs:
       run: ng build --configuration "production" --base-href "http://plantdiseasedetection.infinityfreeapp.com/"
       working-directory: ./frontend_angular 
 
+    - name: Remove old JS files
+      run: |
+        lftp -u ${{ secrets.FTP_USERNAME }}, ${{ secrets.FTP_PASSWORD }} ftpupload.net -e "
+        glob -a rm -f /htdocs/main.*.js;
+        glob -a rm -f /htdocs/runtime.*.js;
+        glob -a rm -f /htdocs/styles.*.js;
+        glob -a rm -f /htdocs/polyfills.*.js;
+        bye;"
+
 
     - name: FTP Deploy to InfinityFree
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
