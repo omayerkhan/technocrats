@@ -3,7 +3,7 @@ name: Deploy to InfinityFree
 on:
   push:
     branches:
-      - dileep 
+      - main 
 
 jobs:
   build-and-deploy:
@@ -31,7 +31,7 @@ jobs:
 
     - name: Remove old JS files
       run: |
-       ftp -inv ${{ secrets.FTP_SERVER }} <<EOF
+       ftp -inv ftpupload.net <<EOF
        user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
        mdelete /htdocs/main.*.js
        mdelete /htdocs/runtime.*.js
