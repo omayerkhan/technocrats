@@ -5,6 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { AppService } from './app.service';
 import { ModalComponent } from './modal/modal.component';
 import { LoginComponent } from './login/login.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -45,8 +46,12 @@ export class AppComponent implements OnInit{
       });
     }
   }
-  constructor(private app: AppService){
-
+  constructor(private app: AppService, private translate:TranslateService){
+    this.translate.addLangs(this.languages);
+    this.translate.setDefaultLang('en');
+ 
+    const browserLang = this.translate.getBrowserLang();
+    this.translate.use('en');
   }
   ngOnInit(){
     if(localStorage.getItem('user')){
@@ -110,7 +115,8 @@ export class AppComponent implements OnInit{
     }
     changeLanguage(event:any){
       this.selectedLanguage=event.target.value;
-        
+      this.translate.use(event.target.value);
+              
         this.app.changeLanguage(this.diseases,event.target.value,'name').subscribe((data:any)=>{
           this.diseases.name = data.data.translations[0].translatedText;
           this.diseases.details.description = data.data.translations[1].translatedText;
@@ -157,23 +163,25 @@ export class AppComponent implements OnInit{
      
     }
     textToSpeech(){
-      let voice = '';
-        voice = 'DiseaseName' + "," + this.diseases.name + "." + 'Description' + "," + this.diseases.details?.description + "." + 'Remedies' + ",";
+      const keysToTranslate = ['DiseaseName', 'Description', 'Remedies', 'Biological', 'Chemical','Prevention'];
+      let voice = ''
+      this.translate.get(keysToTranslate).subscribe((res: any) => {
+        voice = res['DiseaseName'] + "," + this.diseases.name + "." + res['Description'] + "," + this.diseases.details?.description + "." + res['Remedies'] + ",";
         if(this.diseases.details?.treatment){
           if(this.diseases.details.treatment?.biological){
-            voice = voice + 'Biological';
+            voice = voice + res['Biological'];
             this.diseases.details.treatment?.biological.map((x:any)=>{
               voice = voice + x;
             })
           }
           if(this.diseases.details.treatment?.chemical){
-            voice = voice + 'Chemical'
+            voice = voice + res['Chemical']
             this.diseases.details.treatment?.chemical.map((x:any)=>{
               voice = voice +x;
             })
           }
           if(this.diseases.details.treatment?.prevention){
-            voice = voice + 'Prevention'
+            voice = voice + res['Prevention']
             this.diseases.details.treatment?.prevention.map((x:any)=>{
               voice = voice +x;
             })
@@ -186,5 +194,7 @@ export class AppComponent implements OnInit{
           
          })
   
+      });
+       
     }
 }
