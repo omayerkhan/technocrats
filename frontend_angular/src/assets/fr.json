@@ -1,0 +1,9 @@
+{
+    "DiseaseDetails": "Détails de la maladie",
+    "DiseaseName":"Nom de la maladie",
+    "Description":"Description",
+    "Remedies":"Remèdes",
+    "Biological":"Biologique",
+    "Chemical":"Chimique",
+    "Prevention":"La prévention"
+}
