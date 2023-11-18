@@ -106,6 +106,7 @@ export class AppComponent implements OnInit{
         data.result.disease.suggestions.every((x:any) => {
           if(this.commonNames.indexOf(x.name.toLowerCase()) == -1){
             this.diseases = x;
+            sessionStorage.setItem(this.selectedLanguage,JSON.stringify(this.diseases));
             return false;
           } else return true;
         });
@@ -114,12 +115,14 @@ export class AppComponent implements OnInit{
       })
     }
     changeLanguage(event:any){
+      if(!sessionStorage.getItem(this.selectedLanguage)){
       this.selectedLanguage=event.target.value;
       this.translate.use(event.target.value);
               
         this.app.changeLanguage(this.diseases,event.target.value,'name').subscribe((data:any)=>{
           this.diseases.name = data.data.translations[0].translatedText;
           this.diseases.details.description = data.data.translations[1].translatedText;
+          sessionStorage.setItem(this.selectedLanguage,JSON.stringify(this.diseases))
         this.textToSpeech();
           
         })
@@ -130,6 +133,7 @@ export class AppComponent implements OnInit{
    
             data.data.translations.map((x:any)=>{
               this.diseases.details.treatment.biological.push(x.translatedText)
+              sessionStorage.setItem(this.selectedLanguage,JSON.stringify(this.diseases))
               this.textToSpeech();
               
             })
@@ -141,6 +145,7 @@ export class AppComponent implements OnInit{
             this.diseases.details.treatment.chemical = [];
             data.data.translations.map((x:any)=>{
               this.diseases.details.treatment.chemical.push(x.translatedText)
+              sessionStorage.setItem(this.selectedLanguage,JSON.stringify(this.diseases))
              this.textToSpeech();
               
             })
@@ -153,16 +158,21 @@ export class AppComponent implements OnInit{
             this.diseases.details.treatment.prevention = [];
             data.data.translations.map((x:any)=>{
               this.diseases.details.treatment.prevention.push(x.translatedText)
+              sessionStorage.setItem(this.selectedLanguage,JSON.stringify(this.diseases))
               this.textToSpeech();             
             })
            
           })
         }
+        }
+        else{
+          this.diseases = JSON.parse(sessionStorage.getItem(this.selectedLanguage)||'');
+          this.textToSpeech();
+        }
        
-      
-     
     }
     textToSpeech(){
+      if(!sessionStorage.getItem(this.selectedLanguage+"input")){
       const keysToTranslate = ['DiseaseName', 'Description', 'Remedies', 'Biological', 'Chemical','Prevention'];
       let voice = ''
       this.translate.get(keysToTranslate).subscribe((res: any) => {
@@ -197,4 +207,8 @@ export class AppComponent implements OnInit{
       });
        
     }
+    else{
+      this.audio = sessionStorage.getItem(this.selectedLanguage+"input");
+    }
+  }
 }
