@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { ModalComponent } from './modal/modal.component';
 import { LoginComponent } from './login/login.component';
 import { TranslateService } from '@ngx-translate/core';
+import { HomeComponent } from './home/home.component';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
+  btnClicked: boolean = false;
   healthyPlant: boolean = false;
   selectedLanguage:string="en";
   languages:any = [{code:'en',name:'English'},{code:'fr',name:'French'}]
@@ -34,7 +36,17 @@ export class AppComponent implements OnInit{
   loggedIn= false;
   private dynamicModalInstance: ModalComponent | null = null;
   audio: any
- 
+  @ViewChild('homeModal', {static: false})
+ set homeModal(value: ModalComponent){
+  if(value){
+    this.dynamicModalInstance = value;
+    const componentInstance = this.dynamicModalInstance.openComponent(HomeComponent);
+    componentInstance.openCam.subscribe((data:any)=>{
+      this.btnClicked = true;
+    })
+  }
+ }
+
   @ViewChild('dynamicModal', { static: false })
   set dynamicModal(value: ModalComponent) {
     if (value) {
@@ -171,6 +183,7 @@ export class AppComponent implements OnInit{
         }
        
     }
+   
     textToSpeech(){
       if(!sessionStorage.getItem(this.selectedLanguage+"input")){
       const keysToTranslate = ['DiseaseName', 'Description', 'Remedies', 'Biological', 'Chemical','Prevention'];
