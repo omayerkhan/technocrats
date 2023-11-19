@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { ModalComponent } from './modal/modal.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HomeComponent } from './home/home.component';
 const firebaseConfig = {
   apiKey: "AIzaSyCkzoGGXc8NXuerTPD40uNlBLUp7eBVayU",
   authDomain: "plantdisease-17e2d.firebaseapp.com",
@@ -32,7 +33,8 @@ const firebaseConfig = {
     RemediesComponent,
     CropComponent,
     LoginComponent,
-    ModalComponent
+    ModalComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
