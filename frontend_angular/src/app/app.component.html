@@ -10,7 +10,7 @@
      <app-web-cam (image)="handleImage($event)"></app-web-cam>
     </div>
     <div *ngIf="webcamImage">
-      <app-crop [image]="webcamImage.imageAsDataUrl" (cropped)="ImageCropped($event)"></app-crop>
+      <app-crop [image]="webcamImage" (cropped)="ImageCropped($event)"></app-crop>
       <button class="btn btn-primary" (click)="cropped()">Check</button>
     </div>
     <div class="snapshot" *ngIf="webcamImage && isCroppedImage">
