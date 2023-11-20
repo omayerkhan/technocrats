@@ -75,7 +75,7 @@ constructor(private http: HttpClient){}
       return this.http.post(url,body);
     }
 
-    textToSpeech(data:any){
+    textToSpeech(data:any,language:string){
       let body={
         "input":{
           "text": data

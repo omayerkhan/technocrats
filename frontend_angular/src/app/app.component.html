@@ -31,8 +31,8 @@
   </div>
  <app-remedies [diseases]="diseases" [audio] ="audio"></app-remedies> 
  <div class="translate">
-  <select (change)="changeLanguage($event)">
-    <option [value]="lang.code" [selected]="lang.code=='en'" *ngFor="let lang of languages">{{lang.name}}</option>
+  <select (change)="changeLanguage($event)" [(ngModel)]="selectedLanguage">
+    <option [value]="lang.code"  *ngFor="let lang of languages">{{lang.name}}</option>
   </select>
   </div>
 </ng-container>

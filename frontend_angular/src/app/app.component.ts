@@ -17,7 +17,7 @@ export class AppComponent implements OnInit{
   btnClicked: boolean = false;
   healthyPlant: boolean = false;
   selectedLanguage:string="en";
-  languages:any = [{code:'en',name:'English'},{code:'fr',name:'French'}]
+  languages:any = [{code:'en',name:'English'},{code:'hi',name:'Hindi'}]
   showWebcam = true;
   allowCameraSwitch = true;
   multipleWebcamsAvailable = false;
@@ -68,6 +68,7 @@ export class AppComponent implements OnInit{
  
     const browserLang = this.translate.getBrowserLang();
     this.translate.use('en');
+    this.selectedLanguage = 'en';
   }
   ngOnInit(){
     if(localStorage.getItem('user')){
@@ -106,6 +107,8 @@ export class AppComponent implements OnInit{
     this.webcamImage = null;
     this.isCroppedImage = false;
     this.show = false;
+    this.translate.use('en');
+    this.selectedLanguage = 'en';
   }
   ImageCropped(event:any){
     this.croppedImage = event;
@@ -114,6 +117,8 @@ export class AppComponent implements OnInit{
   }
   public analyze(){
     this.healthyPlant = false;
+    this.translate.use('en');
+    this.selectedLanguage = 'en';
       this.app.analyseLeaf(this.webcamImage).subscribe((data:any)=>{
         this.diseases= null;
         if(data.result.is_healthy.binary && (data.result.is_healthy.probability>0.5)){
@@ -217,7 +222,7 @@ export class AppComponent implements OnInit{
           }
         }
         
-       this.app.textToSpeech(voice).subscribe((data:any)=>{
+       this.app.textToSpeech(voice,this.selectedLanguage).subscribe((data:any)=>{
           this.audio = 'data:audio/mp3;base64,' + data.audioContent;
           sessionStorage.setItem(this.selectedLanguage+"input",this.audio)
           

@@ -1,0 +1,10 @@
+{
+    "DiseaseDetails": "रोग विवरण",
+    "DiseaseName":" रोग का नाम",
+    "Description":"विवरण",
+    "Remedies":"उपचार",
+    "Biological":"जैविक",
+    "Chemical":"रासायनिक",
+    "Prevention":"रोकथाम",
+    "Probability":"संभावना"
+}
