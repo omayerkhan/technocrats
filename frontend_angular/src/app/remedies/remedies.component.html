@@ -1,7 +1,7 @@
 <b>{{'DiseaseDetails' | translate}}:</b><br>
   
 <div class="disease">
-  <b>{{'DiseaseName' | translate}}: </b>{{diseases?.name}} <b> Probability : </b>{{diseases?.probability}}<br>
+  <b>{{'DiseaseName' | translate}}: </b>{{diseases?.name}} <b> {{'Probability' | translate }}: </b>{{diseases?.probability}}<br>
   <b>{{'Description' | translate}}: </b>{{diseases.details?.description}}
 </div>
 <div class="remedies" *ngIf="diseases.details?.treatment">

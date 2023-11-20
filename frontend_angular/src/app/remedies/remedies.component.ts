@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
     selector: 'app-remedies',
@@ -10,6 +11,7 @@ import { Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild } fro
     @Input('diseases') diseases: any;
     @Input('audio') audio: any;
     @ViewChild('audioElement') audioElement: ElementRef | undefined;
+    constructor( private translate:TranslateService){}
     ngOnChanges(changes: SimpleChanges): void {
       this.audioElement?.nativeElement.load();  
       this.audioElement?.nativeElement.pause();
