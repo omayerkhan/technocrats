@@ -44,6 +44,10 @@ export class AppComponent implements OnInit{
     componentInstance.openCam.subscribe((data:any)=>{
       this.btnClicked = true;
     })
+    componentInstance.image.subscribe((data:any)=>{
+      this.webcamImage = "data:image/jpeg;base64," + data;
+      this.btnClicked = true;
+    })
   }
  }
 
@@ -75,7 +79,7 @@ export class AppComponent implements OnInit{
   }
   
   public handleImage(webcamImage: WebcamImage): void {
-    this.webcamImage = webcamImage;
+    this.webcamImage = webcamImage.imageAsDataUrl;
   }
   cropped(){
     this.app.detectLabels(this.croppedImage).subscribe((data:any)=>{
@@ -110,7 +114,7 @@ export class AppComponent implements OnInit{
   }
   public analyze(){
     this.healthyPlant = false;
-      this.app.analyseLeaf(this.webcamImage.imageAsDataUrl).subscribe((data:any)=>{
+      this.app.analyseLeaf(this.webcamImage).subscribe((data:any)=>{
         this.diseases= null;
         if(data.result.is_healthy.binary && (data.result.is_healthy.probability>0.5)){
           this.healthyPlant = true;;
@@ -127,10 +131,12 @@ export class AppComponent implements OnInit{
       })
     }
     changeLanguage(event:any){
-      if(!sessionStorage.getItem(this.selectedLanguage)){
       this.selectedLanguage=event.target.value;
       this.translate.use(event.target.value);
-              
+
+      if(!sessionStorage.getItem(this.selectedLanguage)){
+      
+                    
         this.app.changeLanguage(this.diseases,event.target.value,'name').subscribe((data:any)=>{
           this.diseases.name = data.data.translations[0].translatedText;
           this.diseases.details.description = data.data.translations[1].translatedText;
