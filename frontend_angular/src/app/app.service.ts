@@ -7,7 +7,7 @@ constructor(private http: HttpClient){}
     analyseLeaf(webcamImage:any){
         let url ="https://plant.id/api/v3/health_assessment?details=description,treatment,classification,cause&full_disease_list=true";
         let headers = {
-          "Api-Key":"PYcED8lbT2xAZZhNENkaykkbwHNG3sSIdCuyahVslADNR3d2Bb",
+          "Api-Key":"I2MoYHH0i19qaeNcIOBOF5OMtWu6DPZUf0FeHK4gcTbSgvpYE5",
           "Content-Type":"application/json"
         }
         let body ={
