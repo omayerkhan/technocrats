@@ -109,6 +109,7 @@ export class AppComponent implements OnInit{
     this.show = false;
     this.translate.use('en');
     this.selectedLanguage = 'en';
+    this.btnClicked = false;
   }
   ImageCropped(event:any){
     this.croppedImage = event;
