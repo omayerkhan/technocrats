@@ -19,7 +19,6 @@
           ></app-crop>
           <button class="btn btn-primary" (click)="cropped()">Check</button>
         </div>
-        <!-- <div> -->
           <div class="snapshot" *ngIf="webcamImage && isCroppedImage">
             <img class="img" [src]="croppedImage" />
             <br />
@@ -29,7 +28,6 @@
               <button class="btn btn-secondary" (click)="reset()">Reset</button>
             </div>
           </div>
-        <!-- </div> -->
       </div>
     </div>
     
@@ -48,9 +46,10 @@
         </option>
       </select>
     </div>
-    <div *ngIf="healthyPlant">
+    <div class="healthy-plant" *ngIf="healthyPlant">
       <b>
-        looks healthy but there is a possibility of getting below disease.
+        <!-- Looks healthy but there is a possibility of getting below disease. -->
+        {{"HealthyLeafMsg"|translate}}
       </b>
     </div>
     <app-remedies [diseases]="diseases" [audio]="audio"  [healthy]="healthyPlant"></app-remedies>
