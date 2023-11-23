@@ -29,7 +29,7 @@
   <div *ngIf="healthyPlant">
     <b> looks healthy but there is a possibility of getting below disease. </b>
   </div>
- <app-remedies [diseases]="diseases" [audio] ="audio"></app-remedies> 
+ <app-remedies [diseases]="diseases" [audio] ="audio" [healthy]="healthyPlant"></app-remedies> 
  <div class="translate">
   <select (change)="changeLanguage($event)" [(ngModel)]="selectedLanguage">
     <option [value]="lang.code"  *ngFor="let lang of languages">{{lang.name}}</option>
