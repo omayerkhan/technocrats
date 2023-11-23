@@ -6,5 +6,7 @@
     "Biological":"Biological",
     "Chemical":"Chemical",
     "Prevention":"Prevention",
-    "Probability":"Probability"
+    "Probability":"Probability",
+    "Suggestions":"Suggestions",
+    "HealthyLeafMsg":"Looks healthy but there is a possibility of getting below disease"
 }

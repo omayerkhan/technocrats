@@ -6,5 +6,7 @@
     "Biological":"जैविक",
     "Chemical":"रासायनिक",
     "Prevention":"रोकथाम",
-    "Probability":"संभावना"
+    "Probability":"संभावना",
+    "Suggestions":"सुझाव",
+    "HealthyLeafMsg":"स्वस्थ दिख रहे हैं लेकिन रोग से नीचे होने की आशंका है"
 }
