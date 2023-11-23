@@ -9,7 +9,7 @@
     <b>{{ "Description" | translate }}: </b>{{ diseases.details?.description }}
   </div>
   <div class="remedies" *ngIf="diseases.details?.treatment">
-    <b>{{ "Remedies" | translate }}</b>
+    <b>{{ healthyText | translate }}</b>
     <br />
     <div *ngIf="diseases.details.treatment?.biological">
       <b>{{ "Biological" | translate }}</b
