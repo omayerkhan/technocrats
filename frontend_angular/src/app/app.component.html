@@ -5,35 +5,55 @@
   <div *ngIf="!btnClicked">
     <app-modal #homeModal></app-modal>
   </div>
-<div style="text-align:center" class="row" *ngIf="btnClicked">
+  <div style="text-align: center" class="row" *ngIf="btnClicked">
     <div *ngIf="!webcamImage">
-     <app-web-cam (image)="handleImage($event)"></app-web-cam>
+      <app-web-cam (image)="handleImage($event)"></app-web-cam>
     </div>
-    <div *ngIf="webcamImage">
-      <app-crop [image]="webcamImage" (cropped)="ImageCropped($event)"></app-crop>
-      <button class="btn btn-primary" (click)="cropped()">Check</button>
-    </div>
-    <div class="snapshot" *ngIf="webcamImage && isCroppedImage">
-      <img [src]="croppedImage" />
-      <br>
-      <br>
-      <div *ngIf="isPlant">
-        <button class="btn btn-primary" (click)="analyze()">Analyse</button>
-        <button class="btn btn-secondary" (click)="reset()">Reset</button>
+    <div *ngIf="webcamImage" class="items-center">
+      <div class="image-container">
+        <div>
+          <app-crop
+            class="img"
+            [image]="webcamImage"
+            (cropped)="ImageCropped($event)"
+          ></app-crop>
+          <button class="btn btn-primary" (click)="cropped()">Check</button>
+        </div>
+        <!-- <div> -->
+          <div class="snapshot" *ngIf="webcamImage && isCroppedImage">
+            <img class="img" [src]="croppedImage" />
+            <br />
+            <br />
+            <div *ngIf="isPlant">
+              <button class="btn btn-primary" (click)="analyze()">Analyse</button>
+              <button class="btn btn-secondary" (click)="reset()">Reset</button>
+            </div>
+          </div>
+        <!-- </div> -->
       </div>
+    </div>
+    
   </div>
-</div>
-<br>
-<br>
-<ng-container *ngIf="show">
-  <div *ngIf="healthyPlant">
-    <b> looks healthy but there is a possibility of getting below disease. </b>
-  </div>
- <app-remedies [diseases]="diseases" [audio] ="audio"></app-remedies> 
- <div class="translate">
-  <select (change)="changeLanguage($event)" [(ngModel)]="selectedLanguage">
-    <option [value]="lang.code"  *ngFor="let lang of languages">{{lang.name}}</option>
-  </select>
-  </div>
-</ng-container>
+  <br />
+  <br />
+  <ng-container *ngIf="show">
+    <div class="translate">
+      <select
+        class="btn btn-primary"
+        (change)="changeLanguage($event)"
+        [(ngModel)]="selectedLanguage"
+      >
+        <option [value]="lang.code" *ngFor="let lang of languages">
+          {{ lang.name }}
+        </option>
+      </select>
+    </div>
+    <div *ngIf="healthyPlant">
+      <b>
+        looks healthy but there is a possibility of getting below disease.
+      </b>
+    </div>
+    <app-remedies [diseases]="diseases" [audio]="audio"></app-remedies>
+    
+  </ng-container>
 </ng-container>
