@@ -27,7 +27,7 @@ export class AppComponent implements OnInit{
   private nextWebcam: Subject<boolean|string> = new Subject<boolean|string>();
   diseases: any;
   show: boolean = false;
-  commonNames: string[] = ["fungi","abiotic"]
+  commonNames: string[] = ["fungi","abiotic","bacteria","virus"]
   public errors: WebcamInitError[] = [];
   croppedImage: any = '';
   isCroppedImage: boolean= false;
@@ -109,6 +109,7 @@ export class AppComponent implements OnInit{
     this.show = false;
     this.translate.use('en');
     this.selectedLanguage = 'en';
+    this.btnClicked = false;
   }
   ImageCropped(event:any){
     this.croppedImage = event;
