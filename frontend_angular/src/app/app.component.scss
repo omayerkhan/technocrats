@@ -6,3 +6,27 @@
     width: 500px;
   }
 }
+
+.image-container{
+  width: 90vw;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.items-center{
+  display: flex;
+  justify-content: center;
+}
+
+.btn-primary{
+  height: 30px;
+}
+
+
+.translate{
+  text-align: right;
+  margin-right: 5%;
+}

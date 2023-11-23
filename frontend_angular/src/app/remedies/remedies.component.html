@@ -1,30 +1,53 @@
-<b>{{'DiseaseDetails' | translate}}:</b><br>
+<div class="details-container">
+  <div class="center">
+    <h1>{{ "DiseaseDetails" | translate }}</h1>
+  </div>
   
-<div class="disease">
-  <b>{{'DiseaseName' | translate}}: </b>{{diseases?.name}} <b> {{'Probability' | translate }}: </b>{{diseases?.probability}}<br>
-  <b>{{'Description' | translate}}: </b>{{diseases.details?.description}}
+  <div class="disease">
+    <b>{{ "DiseaseName" | translate }}: </b>{{ diseases?.name }}
+    <b> {{ "Probability" | translate }}: </b>{{ diseases?.probability }}<br />
+    <b>{{ "Description" | translate }}: </b>{{ diseases.details?.description }}
+  </div>
+  <div class="remedies" *ngIf="diseases.details?.treatment">
+    <b>{{ healthyText | translate }}</b>
+    <br />
+    <div *ngIf="diseases.details.treatment?.biological">
+      <b>{{ "Biological" | translate }}</b
+      ><br />
+      <ng-container
+        *ngFor="
+          let biological of diseases.details.treatment.biological;
+          index as i
+        "
+      >
+        {{ i + 1 + "." }}{{ biological }}<br />
+      </ng-container>
+    </div>
+    <div *ngIf="diseases.details.treatment?.chemical">
+      <b>{{ "Chemical" | translate }}</b
+      ><br />
+      <ng-container
+        *ngFor="let chemical of diseases.details.treatment.chemical; index as i"
+      >
+        {{ i + 1 + "." }}{{ chemical }}<br />
+      </ng-container>
+    </div>
+    <div *ngIf="diseases.details.treatment?.prevention">
+      <b>{{ "Prevention" | translate }}</b
+      ><br />
+      <ng-container
+        *ngFor="
+          let prevention of diseases.details.treatment.prevention;
+          index as i
+        "
+      >
+        {{ i + 1 + "." }}{{ prevention }}<br />
+      </ng-container>
+    </div>
+  </div>
 </div>
-<div class="remedies" *ngIf="diseases.details?.treatment">
-  <b>{{healthyText | translate}}</b>
-  <br>
-  <div *ngIf="diseases.details.treatment?.biological"><b>{{'Biological' | translate}}</b><br>
-    <ng-container *ngFor="let biological of diseases.details.treatment.biological; index as i">
-      {{(i+1) + '.' }}{{biological}}<br>
-    </ng-container>
-  </div>
-  <div *ngIf="diseases.details.treatment?.chemical"><b>{{'Chemical' | translate}}</b><br>
-    <ng-container *ngFor="let chemical of diseases.details.treatment.chemical; index as i">
-      {{(i+1) + '.' }}{{chemical}}<br>
-    </ng-container>
-  </div>
-  <div *ngIf="diseases.details.treatment?.prevention"><b>{{'Prevention' | translate}}</b><br>
-    <ng-container *ngFor="let prevention of diseases.details.treatment.prevention; index as i">
-      {{(i+1) + '.' }}{{prevention}}<br>
-    </ng-container>
-  </div>
-</div>
-<audio  #audioElement controls [src]="audio">
- 
-</audio>
 
-<button (click)="resetAudio()">Reset</button>
+<div class="audio">
+  <audio #audioElement controls [src]="audio"></audio>
+  <button class="btn btn-secondary" (click)="resetAudio()">Reset</button>
+</div>

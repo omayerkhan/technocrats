@@ -1,3 +1,15 @@
-<button class="btn btn-primary home-btn" (click)="openWebCam()">Take a Picture 📸</button><br>
-<button class="btn btn-primary home-btn" (click)="fileInput.click()">Upload </button>
-<input type="file" id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event)" style="display:none !important">
+<button class="btn btn-primary home-btn" (click)="openWebCam()">
+  Take a Picture <i class="fa-solid fa-camera icon"></i></button
+><br />
+<button class="btn btn-primary home-btn" (click)="fileInput.click()">
+  Upload 
+      <i class="icon fa-solid fa-upload"></i>
+</button>
+<input
+  type="file"
+  id="imageUpload"
+  accept=".png, .jpg, .jpeg"
+  #fileInput
+  (change)="uploadFile($event)"
+  style="display: none !important"
+/>
