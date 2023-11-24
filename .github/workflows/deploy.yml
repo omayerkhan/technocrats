@@ -31,10 +31,9 @@ jobs:
 
 
     - name: FTP Deploy to InfinityFree
-      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      uses: git-ftp/git-ftp-action@master
       with:
-        server: ftpupload.net
-        username: ${{ secrets.FTP_USERNAME }}
+        url: "ftp://ftpupload.net/htdocs/"
+        user: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: frontend_angular/dist/frontend_angular/
-        server-dir: /htdocs/
+        syncroot: frontend_angular/dist/frontend_angular/
