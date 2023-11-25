@@ -36,6 +36,8 @@ export class AppComponent implements OnInit{
   loggedIn= false;
   private dynamicModalInstance: ModalComponent | null = null;
   audio: any
+  probabilityValue: any;
+  data: any;
   @ViewChild('homeModal', {static: false})
  set homeModal(value: ModalComponent){
   if(value){
@@ -122,8 +124,9 @@ export class AppComponent implements OnInit{
     this.selectedLanguage = 'en';
       this.app.analyseLeaf(this.webcamImage).subscribe((data:any)=>{
         this.diseases= null;
-        if(data.result.is_healthy.binary && (data.result.is_healthy.probability>0.5)){
-          this.healthyPlant = true;;
+        this.probabilityValue = data.result.is_healthy.probability.toFixed(2);
+        if(data.result.is_healthy.binary && (data.result.is_healthy.probability>0.75)){
+          this.healthyPlant = true;; 
         }
         data.result.disease.suggestions.every((x:any) => {
           if(this.commonNames.indexOf(x.name.toLowerCase()) == -1){

@@ -8,5 +8,7 @@
     "Prevention":"Prevention",
     "Probability":"Probability",
     "Suggestions":"Suggestions",
-    "HealthyLeafMsg":"Looks healthy but there is a possibility of getting below disease"
+    "HealthyLeafMsg":"Probability of plant being healthy:",
+    "SuggestionMsg":"There is a slight chance of getting below disease to avoid please follow the necessary preventive measures given below",
+    "UnhealthyMsg":"Leaf looks unhealthy below are the disease details please follow the steps to cure the disease"
 }
