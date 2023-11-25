@@ -112,6 +112,7 @@ export class AppComponent implements OnInit{
     this.translate.use('en');
     this.selectedLanguage = 'en';
     this.btnClicked = false;
+    sessionStorage.clear();
   }
   ImageCropped(event:any){
     this.croppedImage = event;
@@ -201,10 +202,10 @@ export class AppComponent implements OnInit{
    
     textToSpeech(){
       if(!sessionStorage.getItem(this.selectedLanguage+"input")){
-      const keysToTranslate = ['DiseaseName', 'Description', 'Remedies', 'Biological', 'Chemical','Prevention'];
+      const keysToTranslate = ['DiseaseName', 'Description', 'Remedies', 'Biological', 'Chemical','Prevention','Suggestions'];
       let voice = ''
       this.translate.get(keysToTranslate).subscribe((res: any) => {
-        voice = res['DiseaseName'] + "," + this.diseases.name + "." + res['Description'] + "," + this.diseases.details?.description + "." + res['Remedies'] + ",";
+        voice = res['DiseaseName'] + "," + this.diseases.name + "." + res['Description'] + "," + this.diseases.details?.description + "." + (this.healthyPlant ? res['Suggestions']: res['Remedies']) + ",";
         if(this.diseases.details?.treatment){
           if(this.diseases.details.treatment?.biological){
             voice = voice + res['Biological'];
