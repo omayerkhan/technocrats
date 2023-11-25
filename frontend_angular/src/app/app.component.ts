@@ -73,6 +73,7 @@ export class AppComponent implements OnInit{
     this.selectedLanguage = 'en';
   }
   ngOnInit(){
+    sessionStorage.clear();
     if(localStorage.getItem('user')){
       this.loggedIn= true;
     }
@@ -151,7 +152,6 @@ export class AppComponent implements OnInit{
           this.diseases.name = data.data.translations[0].translatedText;
           this.diseases.details.description = data.data.translations[1].translatedText;
           sessionStorage.setItem(this.selectedLanguage,JSON.stringify(this.diseases))
-        this.textToSpeech();
           
         })
         if(this.diseases.details.treatment?.biological){
@@ -162,7 +162,6 @@ export class AppComponent implements OnInit{
             data.data.translations.map((x:any)=>{
               this.diseases.details.treatment.biological.push(x.translatedText)
               sessionStorage.setItem(this.selectedLanguage,JSON.stringify(this.diseases))
-              this.textToSpeech();
               
             })
           })
@@ -174,7 +173,6 @@ export class AppComponent implements OnInit{
             data.data.translations.map((x:any)=>{
               this.diseases.details.treatment.chemical.push(x.translatedText)
               sessionStorage.setItem(this.selectedLanguage,JSON.stringify(this.diseases))
-             this.textToSpeech();
               
             })
            
@@ -186,12 +184,14 @@ export class AppComponent implements OnInit{
             this.diseases.details.treatment.prevention = [];
             data.data.translations.map((x:any)=>{
               this.diseases.details.treatment.prevention.push(x.translatedText)
-              sessionStorage.setItem(this.selectedLanguage,JSON.stringify(this.diseases))
-              this.textToSpeech();             
+              sessionStorage.setItem(this.selectedLanguage,JSON.stringify(this.diseases))              
             })
            
           })
         }
+        setTimeout(()=>{
+          this.textToSpeech();
+        },1000)
         }
         else{
           this.diseases = JSON.parse(sessionStorage.getItem(this.selectedLanguage)||'');

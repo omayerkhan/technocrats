@@ -81,8 +81,8 @@ constructor(private http: HttpClient){}
           "text": data
         },
         "voice":{
-          "languageCode":"en-gb",
-          "name":"en-GB-Standard-A",
+          "languageCode": language == 'en' ? "en-gb" : 'hi-IN',
+          
           "ssmlGender":"FEMALE"
         },
         "audioConfig":{
