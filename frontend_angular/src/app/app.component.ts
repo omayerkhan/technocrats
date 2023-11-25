@@ -116,7 +116,7 @@ export class AppComponent implements OnInit{
   ImageCropped(event:any){
     this.croppedImage = event;
     this.isCroppedImage=true;
-    
+    this.isPlant = false;
   }
   public analyze(){
     this.healthyPlant = false;
