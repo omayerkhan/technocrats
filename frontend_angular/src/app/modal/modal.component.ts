@@ -1,12 +1,13 @@
-import { Component, ComponentFactoryResolver, Type, ViewChild, ViewContainerRef } from "@angular/core";
+import { Component, ComponentFactoryResolver, OnInit, Type, ViewChild, ViewContainerRef } from "@angular/core";
 
 @Component({
     'selector':  'app-modal',
     'templateUrl': './modal.component.html',
     'styleUrls': ['./modal.component.scss']
 })
-export class ModalComponent{
+export class ModalComponent implements OnInit{
     @ViewChild('modalContent', { read: ViewContainerRef, static: true }) modalContent!: ViewContainerRef;
+  loggedIn: boolean = false;
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
   
@@ -23,6 +24,11 @@ export class ModalComponent{
   
     ngOnDestroy() {
       this.modalContent.clear();
+    }
+    ngOnInit(): void {
+      if(localStorage.getItem('user')){
+        this.loggedIn = true;
+      }
     }
     
 }

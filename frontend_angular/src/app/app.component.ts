@@ -236,4 +236,9 @@ export class AppComponent implements OnInit{
       this.audio = sessionStorage.getItem(this.selectedLanguage+"input");
     }
   }
+  
+ logout(){
+    localStorage.clear();
+    window.location.reload();
+  }
 }

@@ -2,9 +2,14 @@
 <app-modal *ngIf="!loggedIn" #dynamicModal></app-modal>
 
 <ng-container *ngIf="loggedIn">
+  <div>
+    <i class="fa-solid fa-sign-out icon modal-background" (click)="logout()"></i>
+</div>
+<div style="height:90%">
   <div *ngIf="!btnClicked">
     <app-modal #homeModal></app-modal>
   </div>
+  
   <div style="text-align: center" class="row" *ngIf="btnClicked">
     <div *ngIf="!webcamImage">
       <app-web-cam (image)="handleImage($event)"></app-web-cam>
@@ -55,4 +60,5 @@
     <app-remedies [diseases]="diseases" [audio]="audio"  [healthy]="healthyPlant"></app-remedies>
     
   </ng-container>
+  </div>
 </ng-container>
