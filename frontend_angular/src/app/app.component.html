@@ -51,10 +51,17 @@
         </option>
       </select>
     </div>
+    <div class="healthy-plant">
+      <b>{{"HealthyLeafMsg"|translate}} {{probabilityValue}}</b>
+    </div>
     <div class="healthy-plant" *ngIf="healthyPlant">
       <b>
-        <!-- Looks healthy but there is a possibility of getting below disease. -->
-        {{"HealthyLeafMsg"|translate}}
+        {{"SuggestionMsg" | translate}}
+      </b>
+    </div>
+    <div class="healthy-plant" *ngIf="!healthyPlant">
+      <b>
+        {{"UnhealthyMsg" | translate}}
       </b>
     </div>
     <app-remedies [diseases]="diseases" [audio]="audio"  [healthy]="healthyPlant"></app-remedies>
