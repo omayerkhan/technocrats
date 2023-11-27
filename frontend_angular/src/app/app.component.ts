@@ -191,7 +191,7 @@ export class AppComponent implements OnInit{
         }
         setTimeout(()=>{
           this.textToSpeech();
-        },1000)
+        },2000)
         }
         else{
           this.diseases = JSON.parse(sessionStorage.getItem(this.selectedLanguage)||'');
